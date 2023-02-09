@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,18 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });]
+//visitor
 Route::get('/', function () {
-    return view('welcome');
+    return view('visitor.index');
 });
-
-Route::get('/dashboard', function () {
+Route::get('/menu', function () {
+    return view('visitor.menu');
+});
+//dashboard
+Route::get('/dashboard-test', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::get('/profile', function () {
+    return view('profile');
 });
 
-require __DIR__.'/auth.php';
+
+Route::get('/redirects', [HomeController::class, 'index']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard1');
+    })->name('dashboard')->middleware('checkuser');
+});
