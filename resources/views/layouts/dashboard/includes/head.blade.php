@@ -11,7 +11,6 @@
 <!-- Popper -->
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <!-- Main Styling -->
-
 <link href="{{asset('assets/css/soft-ui-dashboard-tailwind.css?v=1.0.4')}}" rel="stylesheet" />
 <!-- End Tailwind & Flowbite -->
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />

@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 Route::get('/menu', function () {
     return view('visitor.menu');
-});
+})->name('menu');
 //dashboard
 Route::get('/dashboard-test', function () {
     return view('dashboard');
@@ -41,6 +41,12 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard1');
+        return view('dashboard');
     })->name('dashboard')->middleware('checkuser');
+    Route::get('/dashboard/create', function () {
+        return view('crud.create');
+    })->name('dashboard.create')->middleware('checkuser');
+    Route::get('/dashboard/edit', function () {
+        return view('crud.edit');
+    })->name('dashboard.edit')->middleware('checkuser');
 });
