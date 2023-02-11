@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Plate; //data from databases
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class PlateController extends Controller
@@ -16,8 +18,17 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $plates = Plate::all();
-        return view('dashboard')->with('plates', $plates);
+        //join tables
+        $plates = DB::table('plates')
+        ->join('categories', 'plates.categorieID', '=', 'categories.id')
+        ->select('plates.*', 'categories.name AS name_categorie')->get();
+        //Statistic
+        $statistic_plates = Plate::count();
+        $statistic_categories = Categorie::count();
+        $statistic_admins = User::where('role','1')->count();
+        $statistic_users = User::where('role','0')->count();
+
+        return view('dashboard',compact('plates','statistic_plates','statistic_categories','statistic_admins','statistic_users'));
     }
 
     /**

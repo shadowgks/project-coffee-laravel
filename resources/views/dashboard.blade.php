@@ -19,7 +19,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Admins</p>
                                 <h5 class="mb-0 font-bold">
-                                    0
+                                    {{$statistic_admins}}
                                 </h5>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Users</p>
                                 <h5 class="mb-0 font-bold">
-                                    0
+                                    {{$statistic_users}}
                                 </h5>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Plates</p>
                                 <h5 class="mb-0 font-bold">
-                                    0
+                                    {{$statistic_plates}}
                                 </h5>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Categories</p>
                                 <h5 class="mb-0 font-bold">
-                                    0
+                                    {{$statistic_categories}}
                                 </h5>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                                             </div>
                                             <div class="flex flex-col justify-center">
                                                 <h6 class="mb-0 leading-normal text-sm">{{$item->name}}</h6>
-                                                <span class="font-semibold leading-tight text-xs text-slate-400">{{$item->categorieID}}</span>
+                                                <span class="font-semibold leading-tight text-xs text-slate-400">{{$item->name_categorie}}</span>
                                             </div>
                                         </div>
                                     </td>
