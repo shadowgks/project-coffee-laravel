@@ -17,7 +17,7 @@
                     <div class="flex flex-row -mx-3">
                         <div class="flex-none w-2/3 max-w-full px-3">
                             <div>
-                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Today's Money</p>
+                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Admins</p>
                                 <h5 class="mb-0 font-bold">
                                     0
                                 </h5>
@@ -40,7 +40,7 @@
                     <div class="flex flex-row -mx-3">
                         <div class="flex-none w-2/3 max-w-full px-3">
                             <div>
-                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Today's Users</p>
+                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Users</p>
                                 <h5 class="mb-0 font-bold">
                                     0
                                 </h5>
@@ -63,7 +63,7 @@
                     <div class="flex flex-row -mx-3">
                         <div class="flex-none w-2/3 max-w-full px-3">
                             <div>
-                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">New Clients</p>
+                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Plates</p>
                                 <h5 class="mb-0 font-bold">
                                     0
                                 </h5>
@@ -86,7 +86,7 @@
                     <div class="flex flex-row -mx-3">
                         <div class="flex-none w-2/3 max-w-full px-3">
                             <div>
-                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Sales</p>
+                                <p class="mb-0 font-sans font-semibold leading-normal text-sm">Categories</p>
                                 <h5 class="mb-0 font-bold">
                                     0
                                 </h5>
@@ -110,6 +110,19 @@
                     <h6>Plates</h6>
                     <a href="{{route('dashboard.create')}}" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="javascript:;"> <i class="fas fa-plus" aria-hidden="true"> </i>&nbsp;&nbsp;Add New Plate</a>
                 </div>
+                {{-- B Alert --}}
+                @if ($message = Session::get('success'))
+                <div id="alert-border-2" class="flex items-center p-2 m-4 rounded-lg bg-gradient-to-tl from-gray-900 to-slate-800" role="alert">
+                    <ion-icon name="checkmark-done-circle-outline" class="flex-shrink-0 w-6 h-6 mr-2 text-white"></ion-icon>
+                    <div class="ml-3 text-sm text-white font-bold">
+                        {{$message}}.
+                    </div>
+                    <button type="button" class="items-center ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8"  data-dismiss-target="#alert-border-2" aria-label="Close">
+                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+                @endif
+                {{-- E Alert --}}
                 <div class="flex-auto px-0 pt-0 pb-2">
                     <div class="p-0 overflow-x-auto">
                         <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
@@ -123,33 +136,44 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $id = 1
+                                @endphp
+                                @foreach ($plates as $item)
                                 <tr>
                                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         <div class="flex px-2 py-1">
-                                            <span class="font-semibold leading-tight text-xs text-slate-400">1</span>
+                                            <span class="font-semibold leading-tight text-xs text-slate-400">{{$id++}}</span>
                                         </div>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         <div class="flex px-2 py-1">
                                             <div>
-                                                <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user2" />
+                                                <img src="{{ asset($item->picture) }}" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user2" />
                                             </div>
                                             <div class="flex flex-col justify-center">
-                                                <h6 class="mb-0 leading-normal text-sm">Alexa Liras</h6>
+                                                <h6 class="mb-0 leading-normal text-sm">{{$item->name}}</h6>
+                                                <span class="font-semibold leading-tight text-xs text-slate-400">{{$item->categorieID}}</span>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                        <span class="font-semibold leading-tight text-xs text-slate-400">.</span>
+                                        <span class="font-semibold leading-tight text-xs text-slate-400">{{$item->content}}</span>
                                     </td>
                                     <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                        <span class="font-semibold leading-tight text-xs text-slate-400">11/01/19</span>
+                                        <span class="font-semibold leading-tight text-xs text-slate-400">{{number_format($item->price, 2)}}DH</span>
                                     </td>
-                                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent text-center">
-                                        <a class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="javascript:;"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text" aria-hidden="true"></i>Delete</a>
-                                        <a href="{{route('dashboard.edit')}}" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="javascript:;"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</a>
+                                    <td class="p-2 flex justify-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent text-center">
+                                        <a href="{{route('dashboard.edit',$item->id)}}" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="javascript:;"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</a>
+                                        <form action="{{route('dashboard.destroy',$item->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="javascript:;"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text" aria-hidden="true"></i>Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
+                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>

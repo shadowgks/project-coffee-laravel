@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PlateController;
 use App\Http\Controllers\UserController;
+use App\Models\Categorie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 //Visitor
 Route::get('/', function () {
-    return view('visitor.index');
-});
+    return view('index');
+})->name('home');
 Route::get('/menu', function () {
-    return view('visitor.menu');
+    return view('menu');
 })->name('menu');
 
 // Route::resource('/dashboard', [PlateController::class]);
@@ -31,15 +33,20 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->controller(PlateController::class)->group(function () {
+])->controller(PlateController::class)
+->group(function () {
     Route::get('/dashboard', 'index')
         ->name('dashboard')->middleware('checkuser');
     Route::get('/dashboard/create', 'create')
         ->name('dashboard.create')->middleware('checkuser');
     Route::post('/dashboard/store', 'store')
-        ->name('store')->middleware('checkuser');
-    Route::get('/dashboard/edit', 'edit')
+        ->name('dashboard.store')->middleware('checkuser');
+    Route::get('/dashboard/edit/{id}', 'edit')
         ->name('dashboard.edit')->middleware('checkuser');
+    Route::PUT('/dashboard/update/{id}', 'update')
+    ->name('dashboard.update')->middleware('checkuser');
+    Route::delete('/dashboard/{id}', 'destroy')
+    ->name('dashboard.destroy')->middleware('checkuser');
 
     // Route::get('/dashboard/create', function () {
     //     return view('crud.create');

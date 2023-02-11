@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Plate; //data from databases
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class PlateController extends Controller
      */
     public function create()
     {
-        return view('crud.create');
+        $categories = Categorie::all();
+        return view('crud.create')->with('categories',$categories);
     }
 
     /**
@@ -37,7 +39,25 @@ class PlateController extends Controller
      */
     public function store(Request $request)
     {
-        return '4';
+        $request->validate([
+            'name' => 'required|max:30|min:2',
+            'content' => 'required|max:250|min:2',
+            'price' => 'required',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100048',
+            'categorieID' => 'required',
+        ]);
+
+        $plate = $request->all();
+        //----------B Upload pictures--------------
+        $picture = $request->file('picture');
+        $fileName = time().$picture->getClientOriginalName();
+        $path = $picture->storeAs('images', $fileName, 'public');
+        $plate["picture"] = 'storage/'.$path;
+        //----------E Upload pictures--------------
+        Plate::create($plate);
+
+        return redirect()->route('dashboard')
+        ->with('success','Plate has been created successfully.');
     }
 
     /**
@@ -59,7 +79,9 @@ class PlateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plate = Plate::find($id);
+        $categories = Categorie::all();
+        return view('crud.edit',compact('plate','categories'));
     }
 
     /**
@@ -71,7 +93,30 @@ class PlateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validation for required fields (and using some numeric value)
+        $request->validate([
+            'name' => 'required|max:30',
+            'content' => 'required|max:250',
+            'price' => 'required',
+            'categorieID' => 'required',
+        ]);
+
+        $inputs = $request->all();
+        //----------B Upload pictures--------------
+        if($picture = $request->file('picture')){
+            $fileName = time().$picture->getClientOriginalName();
+            $path = $picture->storeAs('images', $fileName, 'public');
+            $inputs["picture"] = 'storage/'.$path;
+        }else{
+            unset($inputs["picture"]);
+        }
+        //----------E Upload pictures--------------
+
+        $plate = Plate::find($id);
+        $plate->update($inputs);
+
+        return redirect()->route('dashboard')
+        ->with('success','Plate updated successfully');
     }
 
     /**
@@ -82,6 +127,10 @@ class PlateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plate = plate::find($id);
+        $plate->delete();
+
+        return redirect()->route('dashboard')
+        ->with('success','Plate deleted successfully');
     }
 }

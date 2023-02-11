@@ -29,20 +29,21 @@
                     <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
 
                     <!-- Dropdown menu -->
-                    <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+
+                    <div id="userDropdown" class="z-10 hidden divide-y bg-gradient-to-tl from-gray-900 to-slate-800 text-white rounded-lg">
+                        <div class="px-4 py-3 text-sm">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="font-medium truncate">{{ Auth::user()->email }}</div>
                         </div>
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+                        <ul class="py-2 text-sm" aria-labelledby="avatarButton">
                             <li>
-                                <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                                <a href="{{ route('profile.show') }}" class="block px-4 py-2">Profile</a>
                             </li>
                         </ul>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
-                            <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</button>
+                            <button type="submit" class="block px-4 py-2 text-sm">Logout</button>
                         </form>
                     </div>
                 </li>
