@@ -7,6 +7,7 @@ Home
 @section('links')
 @endsection
 
+
 @section('content')
 <section>
     <div class="bg-cover bg-center h-screen backdrop-blur" style="background-image: url('./assets/img/slider-bg-coffe-1.jpg')">

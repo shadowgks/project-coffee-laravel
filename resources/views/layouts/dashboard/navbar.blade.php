@@ -7,9 +7,9 @@
                 <li class="leading-normal text-sm">
                     <a class="opacity-50 text-slate-700" href="javascript:;">Pages</a>
                 </li>
-                <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">Dashboard</li>
+                <li class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">@yield('bar')</li>
             </ol>
-            <h6 class="mb-0 font-bold capitalize">Dashboard</h6>
+            <h6 class="mb-0 font-bold capitalize">@yield('bar')</h6>
         </nav>
 
         <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -27,15 +27,18 @@
             <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
                 <li class="flex items-center">
                     <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-
                     <!-- Dropdown menu -->
-
                     <div id="userDropdown" class="z-10 hidden divide-y bg-gradient-to-tl from-gray-900 to-slate-800 text-white rounded-lg">
                         <div class="px-4 py-3 text-sm">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="font-medium truncate">{{ Auth::user()->email }}</div>
                         </div>
                         <ul class="py-2 text-sm" aria-labelledby="avatarButton">
+                            @if(Auth::user()->role == 1)
+                            <li>
+                                <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                            </li>
+                            @endif
                             <li>
                                 <a href="{{ route('profile.show') }}" class="block px-4 py-2">Profile</a>
                             </li>
