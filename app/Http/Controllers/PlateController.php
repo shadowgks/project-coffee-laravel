@@ -7,7 +7,7 @@ use App\Models\Plate; //data from databases
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\View;
 
 class PlateController extends Controller
 {
@@ -19,16 +19,41 @@ class PlateController extends Controller
     public function index()
     {
         //join tables
-        $plates = DB::table('plates')
-        ->join('categories', 'plates.categorieID', '=', 'categories.id')
-        ->select('plates.*', 'categories.name AS name_categorie')->get();
-        //Statistic
-        $statistic_plates = Plate::count();
-        $statistic_categories = Categorie::count();
-        $statistic_admins = User::where('role','1')->count();
-        $statistic_users = User::where('role','0')->count();
+        // $plates = DB::table('plates')
+        // ->join('categories', 'plates.categorieID', '=', 'categories.id')
+        // ->select('plates.*', 'categories.name AS name_categorie')->get();
+        // //Statistic
+        // $statistic_plates = Plate::count();
+        // $statistic_categories = Categorie::count();
+        // $statistic_admins = User::where('role','1')->count();
+        // $statistic_users = User::where('role','0')->count();
 
-        return view('dashboard',compact('plates','statistic_plates','statistic_categories','statistic_admins','statistic_users'));
+        // //for share data to another pages use 'View share'
+        // View::share('recent_plates',compact('plates'
+        // ,'statistic_plates'
+        // ,'statistic_categories'
+        // ,'statistic_admins'
+        // ,'statistic_users'));
+        return view('dashboard');
+
+        // //methode 1 to pass data
+        // return view('dashboard',
+        //     compact('plates'
+        //     ,'statistic_plates'
+        //     ,'statistic_categories'
+        //     ,'statistic_admins'
+        //     ,'statistic_users'));
+
+        // //Another methode 2 to pass data
+        // $data = [
+        //     'plates' => $plates,
+        //     'statistic_plates' => $statistic_plates,
+        //     'statistic_categories' => $statistic_categories,
+        //     'statistic_admins' => $statistic_admins,
+        //     'statistic_users' => $statistic_users,
+        // ];
+        // return view('dashboard');
+
     }
 
     /**
@@ -39,7 +64,7 @@ class PlateController extends Controller
     public function create()
     {
         $categories = Categorie::all();
-        return view('crud.create')->with('categories',$categories);
+        return view('crud.create',compact('categories'));
     }
 
     /**

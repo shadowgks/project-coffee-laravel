@@ -5,7 +5,6 @@ Home
 @endsection
 
 @section('links')
-
 @endsection
 
 @section('content')
@@ -28,9 +27,7 @@ Home
 @endsection
 
 @section('footer')
-
 @endsection
 
 @section('scripts')
-
 @endsection

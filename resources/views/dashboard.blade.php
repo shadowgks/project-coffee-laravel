@@ -19,7 +19,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Admins</p>
                                 <h5 class="mb-0 font-bold">
-                                    {{$statistic_admins}}
+                                    {{$recent_plates['statistic_admins']}}
                                 </h5>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Users</p>
                                 <h5 class="mb-0 font-bold">
-                                    {{$statistic_users}}
+                                    {{$recent_plates['statistic_users']}}
                                 </h5>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Plates</p>
                                 <h5 class="mb-0 font-bold">
-                                    {{$statistic_plates}}
+                                    {{$recent_plates['statistic_plates']}}
                                 </h5>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             <div>
                                 <p class="mb-0 font-sans font-semibold leading-normal text-sm">Categories</p>
                                 <h5 class="mb-0 font-bold">
-                                    {{$statistic_categories}}
+                                    {{$recent_plates['statistic_categories']}}
                                 </h5>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                                 @php
                                 $id = 1
                                 @endphp
-                                @foreach ($plates as $item)
+                                @foreach ($recent_plates['plates'] as $item)
                                 <tr>
                                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         <div class="flex px-2 py-1">

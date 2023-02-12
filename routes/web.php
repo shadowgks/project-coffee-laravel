@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\PlateController;
 use App\Http\Controllers\UserController;
 use App\Models\Categorie;
+use App\Models\Plate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,11 @@ Route::get('/menu', function () {
     return view('menu');
 })->name('menu');
 
+//profile
+// Route::get('/profile', function(){
+//     return view('profile');
+// })->name('profile');
+
 // Route::resource('/dashboard', [PlateController::class]);
 //Admin
 Route::get('/redirects', [UserController::class, 'index']);
@@ -36,13 +42,13 @@ Route::middleware([
 ])->controller(PlateController::class)
 ->group(function () {
     Route::get('/dashboard', 'index')
-        ->name('dashboard')->middleware('checkuser');
+    ->name('dashboard')->middleware('checkuser');
     Route::get('/dashboard/create', 'create')
-        ->name('dashboard.create')->middleware('checkuser');
+    ->name('dashboard.create')->middleware('checkuser');
     Route::post('/dashboard/store', 'store')
-        ->name('dashboard.store')->middleware('checkuser');
+    ->name('dashboard.store')->middleware('checkuser');
     Route::get('/dashboard/edit/{id}', 'edit')
-        ->name('dashboard.edit')->middleware('checkuser');
+    ->name('dashboard.edit')->middleware('checkuser');
     Route::PUT('/dashboard/update/{id}', 'update')
     ->name('dashboard.update')->middleware('checkuser');
     Route::delete('/dashboard/{id}', 'destroy')
