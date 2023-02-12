@@ -11,7 +11,7 @@ Login
 
 @section('content')
 <section>
-    <div class="bg-cover bg-center h-screen backdrop-blur" style="background-image: url('./assets/img/slider-bg-coffe-1.jpg')">
+    <div class="bg-cover bg-center h-screen backdrop-blur" style="background-image: url('./assets/img/signup-bg.png')">
         <x-guest-layout>
             <x-jet-authentication-card>
                 <x-slot name="logo">
@@ -61,7 +61,7 @@ Login
                     @endif
         
                     <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-white hover:text-gray-900" href="{{ route('login') }}">
+                        <a class="underline text-sm text-white hover:text-gray-400" href="{{ route('login') }}">
                             {{ __('Already registered?') }}
                         </a>
         

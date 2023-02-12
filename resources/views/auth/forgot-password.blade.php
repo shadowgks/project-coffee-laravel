@@ -11,7 +11,7 @@ Forgot Password
 
 @section('content')
 <section>
-    <div class="bg-cover bg-center h-screen backdrop-blur" style="background-image: url('./assets/img/slider-bg-coffe-1.jpg')">
+    <div class="bg-right h-screen backdrop-blur" style="background-image: url('./assets/img/background-login.png')">
         <x-guest-layout>
             <x-jet-authentication-card>
                 <x-slot name="logo">

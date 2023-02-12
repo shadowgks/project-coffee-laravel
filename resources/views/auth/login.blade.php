@@ -10,7 +10,7 @@ Login
 
 @section('content')
 <section>
-    <div class="bg-cover bg-center h-screen backdrop-blur" style="background-image: url('./assets/img/slider-bg-coffe-1.jpg')">
+    <div class="bg-right h-screen backdrop-blur" style="background-image: url('./assets/img/background-login.png')">
         <x-guest-layout>
             <x-jet-authentication-card>
                 <x-slot name="logo">
@@ -47,7 +47,7 @@ Login
         
                     <div class="flex items-center justify-end mt-4">
                         @if (Route::has('password.request'))
-                            <a class="underline text-sm text-white hover:text-gray-900" href="{{ route('password.request') }}">
+                            <a class="underline text-sm text-white hover:text-gray-400" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                         @endif

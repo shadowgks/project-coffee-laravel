@@ -1,5 +1,6 @@
+
 <footer class="p-4 md:p-8 lg:p-10 coffee-bg">
-    @yiled('footer')
+    @yield('footer')
     <div class="mx-auto max-w-screen-xl text-center">
         <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
             <img src="assets/img/Logo Coffee.png" class="mr-3 h-14 sm:h-20" alt="Flowbite Logo" />
