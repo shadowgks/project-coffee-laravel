@@ -64,7 +64,7 @@ class PlateController extends Controller
     public function create()
     {
         $categories = Categorie::all();
-        return view('crud.create',compact('categories'));
+        return view('create', compact('categories'));
     }
 
     /**
@@ -86,14 +86,14 @@ class PlateController extends Controller
         $plate = $request->all();
         //----------B Upload pictures--------------
         $picture = $request->file('picture');
-        $fileName = time().$picture->getClientOriginalName();
+        $fileName = time() . $picture->getClientOriginalName();
         $path = $picture->storeAs('images', $fileName, 'public');
-        $plate["picture"] = 'storage/'.$path;
+        $plate["picture"] = 'storage/' . $path;
         //----------E Upload pictures--------------
         Plate::create($plate);
 
         return redirect()->route('dashboard')
-        ->with('success','Plate has been created successfully.');
+            ->with('success', 'Plate has been created successfully.');
     }
 
     /**
@@ -117,7 +117,7 @@ class PlateController extends Controller
     {
         $plate = Plate::find($id);
         $categories = Categorie::all();
-        return view('crud.edit',compact('plate','categories'));
+        return view('edit', compact('plate', 'categories'));
     }
 
     /**
@@ -139,11 +139,11 @@ class PlateController extends Controller
 
         $inputs = $request->all();
         //----------B Upload pictures--------------
-        if($picture = $request->file('picture')){
-            $fileName = time().$picture->getClientOriginalName();
+        if ($picture = $request->file('picture')) {
+            $fileName = time() . $picture->getClientOriginalName();
             $path = $picture->storeAs('images', $fileName, 'public');
-            $inputs["picture"] = 'storage/'.$path;
-        }else{
+            $inputs["picture"] = 'storage/' . $path;
+        } else {
             unset($inputs["picture"]);
         }
         //----------E Upload pictures--------------
@@ -152,7 +152,7 @@ class PlateController extends Controller
         $plate->update($inputs);
 
         return redirect()->route('dashboard')
-        ->with('success','Plate updated successfully');
+            ->with('success', 'Plate updated successfully');
     }
 
     /**
@@ -167,6 +167,6 @@ class PlateController extends Controller
         $plate->delete();
 
         return redirect()->route('dashboard')
-        ->with('success','Plate deleted successfully');
+            ->with('success', 'Plate deleted successfully');
     }
 }

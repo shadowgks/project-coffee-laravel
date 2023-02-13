@@ -292,6 +292,87 @@
             </div>
         </div>
     </div>
+    <!-- table 2 -->
+    <div class="flex flex-wrap -mx-3 pt-4">
+        <div class="flex-none w-full max-w-full px-3">
+            <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="p-6 flex justify-between pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                    <h6>Users</h6>
+                </div>
+                {{-- B Alert --}}
+                @if ($message = Session::get('success'))
+                    <div id="alert-border-2" class="flex items-center p-2 m-4 rounded-lg bg-gradient-to-tl from-gray-900 to-slate-800" role="alert">
+                        <svg width="25px" height="25px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.4800000000000001"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path d="M9 10L12.2581 12.4436C12.6766 12.7574 13.2662 12.6957 13.6107 12.3021L20 5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"></path>
+                                <path
+                                    d="M21 12C21 13.8805 20.411 15.7137 19.3156 17.2423C18.2203 18.7709 16.6736 19.9179 14.893 20.5224C13.1123 21.1268 11.187 21.1583 9.38744 20.6125C7.58792 20.0666 6.00459 18.9707 4.85982 17.4789C3.71505 15.987 3.06635 14.174 3.00482 12.2945C2.94329 10.415 3.47203 8.56344 4.51677 6.99987C5.56152 5.4363 7.06979 4.23925 8.82975 3.57685C10.5897 2.91444 12.513 2.81996 14.3294 3.30667"
+                                    stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"></path>
+                            </g>
+                        </svg>
+                        <div class="ml-2 text-sm text-white font-bold">
+                            {{ $message }}.
+                        </div>
+                        <button type="button" class="items-center ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8" data-dismiss-target="#alert-border-2" aria-label="Close">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                @endif
+                {{-- E Alert --}}
+                <div class="flex-auto px-0 pt-0 pb-2">
+                    <div class="p-0 overflow-x-auto">
+                        <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                            <thead class="align-bottom">
+                                <tr>
+                                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">#</th>
+                                    <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Name</th>
+                                    <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Email</th>
+                                    <th class="px-6 py-3 font-bold uppercase text-left align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $id = 1;
+                                @endphp
+                                @foreach ($recent_plates['users'] as $user)
+                                    <tr>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                            <div class="flex px-2 py-1">
+                                                <span class="font-semibold leading-tight text-xs text-slate-400">{{ $id++ }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                            <div class="flex px-2 py-1">
+                                                <div class="flex flex-col justify-center">
+                                                    <h6 class="mb-0 leading-normal text-sm">{{ $user->name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                            <span class="font-semibold leading-tight text-xs text-slate-400">{{ $user->email }}</span>
+                                        </td>
+                                        <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                                                {{-- <form action="{{ route('user.update', $item->id) }}" method="post"> --}}
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input id="follow" class="mt-0.54 rounded-10 duration-250 ease-soft-in-out after:rounded-circle after:shadow-soft-2xl after:duration-250 checked:after:translate-x-5.25 h-5 relative float-left ml-auto w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-slate-800/95 checked:bg-slate-800/95 checked:bg-none checked:bg-right" type="checkbox" "="" checked="">
+                                                {{-- </form> --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('footer')

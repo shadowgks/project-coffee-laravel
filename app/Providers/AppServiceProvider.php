@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
             ->get();
 
         $categories = Categorie::all();
+        $users = User::all();
 
         //Statistic
         $statistic_plates = Plate::count();
@@ -52,7 +53,8 @@ class AppServiceProvider extends ServiceProvider
             'statistic_plates',
             'statistic_categories',
             'statistic_admins',
-            'statistic_users'
+            'statistic_users',
+            'users'
         ));
     }
 }
