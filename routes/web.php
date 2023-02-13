@@ -27,12 +27,6 @@ Route::get('/menu', function () {
     return view('menu');
 })->name('menu');
 
-//profile
-// Route::get('/profile', function(){
-//     return view('profile');
-// })->name('profile');
-
-// Route::resource('/dashboard', [PlateController::class]);
 //Admin
 Route::get('/redirects', [UserController::class, 'index']);
 Route::middleware([
@@ -40,27 +34,17 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->controller(PlateController::class)
-->group(function () {
-    Route::get('/dashboard', 'index')
-    ->name('dashboard')->middleware('checkuser');
-    Route::get('/dashboard/create', 'create')
-    ->name('dashboard.create')->middleware('checkuser');
-    Route::post('/dashboard/store', 'store')
-    ->name('dashboard.store')->middleware('checkuser');
-    Route::get('/dashboard/edit/{id}', 'edit')
-    ->name('dashboard.edit')->middleware('checkuser');
-    Route::PUT('/dashboard/update/{id}', 'update')
-    ->name('dashboard.update')->middleware('checkuser');
-    Route::delete('/dashboard/{id}', 'destroy')
-    ->name('dashboard.destroy')->middleware('checkuser');
-
-    // Route::get('/dashboard/create', function () {
-    //     return view('crud.create');
-    // })->name('dashboard.create')->middleware('checkuser');
-    // Route::get('/dashboard/edit', function () {
-    //     return view('crud.edit');
-    // })->name('dashboard.edit')->middleware('checkuser');
-    // Route::resource('/dashboard',[PlateController::class])
-    // ->middleware('checkuser');
-
-});
+    ->group(function () {
+        Route::get('/dashboard', 'index')
+            ->name('dashboard')->middleware('checkuser');
+        Route::get('/dashboard/create', 'create')
+            ->name('dashboard.create')->middleware('checkuser');
+        Route::post('/dashboard/store', 'store')
+            ->name('dashboard.store')->middleware('checkuser');
+        Route::get('/dashboard/edit/{id}', 'edit')
+            ->name('dashboard.edit')->middleware('checkuser');
+        Route::PUT('/dashboard/update/{id}', 'update')
+            ->name('dashboard.update')->middleware('checkuser');
+        Route::delete('/dashboard/{id}', 'destroy')
+            ->name('dashboard.destroy')->middleware('checkuser');
+    });

@@ -23,7 +23,5 @@ class CheckUser
         }else{
             return $next($request);
         }
-
-
     }
 }

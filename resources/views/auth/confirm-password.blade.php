@@ -1,3 +1,11 @@
+@extends('layouts.visitor.master')
+
+@section('title')
+    Confirm Password
+@endsection
+
+@section('links')
+@endsection
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -26,3 +34,11 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+@section('content')
+@endsection
+
+@section('footer')
+@endsection
+
+@section('scripts')
+@endsection
