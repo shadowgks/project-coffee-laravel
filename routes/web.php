@@ -29,6 +29,8 @@ Route::get('/menu', function () {
 
 //Admin
 Route::get('/redirects', [UserController::class, 'index']);
+//role
+Route::put('/dashboard/role/{id}', [UserController::class, 'update'])->name('dashboard.role.update')->middleware('checkuser');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -47,4 +49,4 @@ Route::middleware([
             ->name('dashboard.update')->middleware('checkuser');
         Route::delete('/dashboard/{id}', 'destroy')
             ->name('dashboard.destroy')->middleware('checkuser');
-    });
+});

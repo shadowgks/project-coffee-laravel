@@ -202,8 +202,7 @@
                 <div class="p-6 flex justify-between pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                     <h6>Plates</h6>
                     <a href="{{ route('dashboard.create') }}"
-                        class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25"
-                        href="javascript:;"> <i class="fas fa-plus" aria-hidden="true"> </i>&nbsp;&nbsp;Add New Plate</a>
+                        class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25"> <i class="fas fa-plus" aria-hidden="true"> </i>&nbsp;&nbsp;Add New Plate</a>
                 </div>
                 {{-- B Alert --}}
                 @if ($message = Session::get('success'))
@@ -273,13 +272,13 @@
                                         <td class="p-2 flex justify-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent text-center">
                                             <a href="{{ route('dashboard.edit', $item->id) }}"
                                                 class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700"
-                                                href="javascript:;"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</a>
+                                                ><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</a>
                                             <form action="{{ route('dashboard.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text"
-                                                    href="javascript:;"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text" aria-hidden="true"></i>Delete</button>
+                                                    ><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text" aria-hidden="true"></i>Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -332,7 +331,7 @@
                                     <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">#</th>
                                     <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Name</th>
                                     <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Email</th>
-                                    <th class="px-6 py-3 font-bold uppercase text-left align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
+                                    <th class="px-6 py-3 font-bold uppercase text-center align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -357,11 +356,15 @@
                                             <span class="font-semibold leading-tight text-xs text-slate-400">{{ $user->email }}</span>
                                         </td>
                                         <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                                {{-- <form action="{{ route('user.update', $item->id) }}" method="post"> --}}
+                                            <form action="{{ route('dashboard.role.update', $user->id) }}" method="post">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input id="follow" class="mt-0.54 rounded-10 duration-250 ease-soft-in-out after:rounded-circle after:shadow-soft-2xl after:duration-250 checked:after:translate-x-5.25 h-5 relative float-left ml-auto w-10 cursor-pointer appearance-none border border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain bg-left bg-no-repeat align-top transition-all after:absolute after:top-px after:h-4 after:w-4 after:translate-x-px after:bg-white after:content-[''] checked:border-slate-800/95 checked:bg-slate-800/95 checked:bg-none checked:bg-right" type="checkbox" "="" checked="">
-                                                {{-- </form> --}}
+                                                    @if($user->role == 1)
+                                                        <button type="submit" name="admin" value="1" class="px-6 mb-0 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-red-600 hover:scale-102 hover:shadow-soft-xs active:opacity-85">ADMIN</button>
+                                                    @else
+                                                        <button type="submit" name="user" value="0" class="px-6 mb-0 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-blue-600 to-cyan-400 hover:scale-102 hover:shadow-soft-xs active:opacity-85">USER</button>
+                                                    @endif
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
