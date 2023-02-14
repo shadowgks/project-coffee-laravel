@@ -18,42 +18,7 @@ class PlateController extends Controller
      */
     public function index()
     {
-        //join tables
-        // $plates = DB::table('plates')
-        // ->join('categories', 'plates.categorieID', '=', 'categories.id')
-        // ->select('plates.*', 'categories.name AS name_categorie')->get();
-        // //Statistic
-        // $statistic_plates = Plate::count();
-        // $statistic_categories = Categorie::count();
-        // $statistic_admins = User::where('role','1')->count();
-        // $statistic_users = User::where('role','0')->count();
-
-        // //for share data to another pages use 'View share'
-        // View::share('recent_plates',compact('plates'
-        // ,'statistic_plates'
-        // ,'statistic_categories'
-        // ,'statistic_admins'
-        // ,'statistic_users'));
         return view('dashboard');
-
-        // //methode 1 to pass data
-        // return view('dashboard',
-        //     compact('plates'
-        //     ,'statistic_plates'
-        //     ,'statistic_categories'
-        //     ,'statistic_admins'
-        //     ,'statistic_users'));
-
-        // //Another methode 2 to pass data
-        // $data = [
-        //     'plates' => $plates,
-        //     'statistic_plates' => $statistic_plates,
-        //     'statistic_categories' => $statistic_categories,
-        //     'statistic_admins' => $statistic_admins,
-        //     'statistic_users' => $statistic_users,
-        // ];
-        // return view('dashboard');
-
     }
 
     /**
@@ -79,7 +44,7 @@ class PlateController extends Controller
             'name' => 'required|max:30|min:2',
             'content' => 'required|max:250|min:2',
             'price' => 'required',
-            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100048',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2024',
             'categorieID' => 'required',
         ]);
 
@@ -134,6 +99,7 @@ class PlateController extends Controller
             'name' => 'required|max:30',
             'content' => 'required|max:250',
             'price' => 'required',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2024',
             'categorieID' => 'required',
         ]);
 
